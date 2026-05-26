@@ -1,0 +1,20 @@
+table: procurement
+primary_key: procurement_id
+description: Contracts, consulting, professional services, and contractor dependency.
+columns:
+  procurement_id: {type: string, required: true}
+  entity_id: {type: string, required: true}
+  fy: {type: string, required: true}
+  supplier_name: {type: string, required: false}
+  supplier_entity_id: {type: string, required: false}
+  procurement_category: {type: string, required: false}
+  procurement_spend: {type: number, required: false}
+  contractor_spend: {type: number, required: false}
+  professional_services_spend: {type: number, required: false}
+  contractor_jobs_est: {type: number, required: false}
+  estimation_method: {type: string, required: false}
+  contract_reference: {type: string, required: false}
+  competitive_process: {type: string, required: false}
+  unit: {type: string, required: true}
+  source_id: {type: string, required: true}
+  confidence: {type: string, required: true}
