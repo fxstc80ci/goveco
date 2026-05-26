@@ -1,0 +1,31 @@
+table: public_capital_flows
+primary_key: flow_id
+description: Tracks recoverable, unrecoverable, impaired, written off, remitted, or outstanding public capital.
+columns:
+  flow_id: {type: string, required: true}
+  entity_id: {type: string, required: true}
+  program_id: {type: string, required: false}
+  fy: {type: string, required: true}
+  flow_type:
+    type: enum
+    required: true
+    values: [grant, contribution, repayable_contribution, loan, forgivable_loan, equity_investment, capital_injection, loan_guarantee, guarantee_called, tax_remission, debt_writeoff, impairment, dividend_received, sale_proceeds, repayment_received]
+  amount: {type: number, required: true}
+  recipient: {type: string, required: false}
+  purpose: {type: string, required: false}
+  recoverability:
+    type: enum
+    required: true
+    values: [unrecoverable_by_design, conditionally_recoverable, recoverable, guaranteed_exposure_only, impaired, written_off, recovered, unknown]
+  expected_return: {type: number, required: false}
+  repayment_due: {type: string, required: false}
+  repayment_status: {type: string, required: false}
+  amount_repaid: {type: number, required: false}
+  amount_written_off: {type: number, required: false}
+  amount_remitted: {type: number, required: false}
+  amount_impaired: {type: number, required: false}
+  net_unrecovered: {type: number, required: false}
+  unit: {type: string, required: true}
+  source_id: {type: string, required: true}
+  confidence: {type: string, required: true}
+  notes: {type: string, required: false}
