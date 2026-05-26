@@ -1,0 +1,23 @@
+table: balance_sheet_exposure
+primary_key: exposure_id
+description: Assets, liabilities, guarantees, debt, and contingent public exposure.
+columns:
+  exposure_id: {type: string, required: true}
+  entity_id: {type: string, required: true}
+  fy: {type: string, required: true}
+  total_assets: {type: number, required: false}
+  total_liabilities: {type: number, required: false}
+  net_assets: {type: number, required: false}
+  debt: {type: number, required: false}
+  guarantees_authorized: {type: number, required: false}
+  guarantees_used: {type: number, required: false}
+  contingent_liabilities: {type: number, required: false}
+  pension_obligation: {type: number, required: false}
+  environmental_liability: {type: number, required: false}
+  p3_commitments: {type: number, required: false}
+  deferred_maintenance: {type: number, required: false}
+  unit: {type: string, required: true}
+  basis: {type: string, required: true}
+  source_id: {type: string, required: true}
+  confidence: {type: string, required: true}
+  extracted_at: {type: string, required: true}
