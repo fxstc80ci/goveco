@@ -1,0 +1,30 @@
+table: annual_costs
+primary_key: annual_cost_id
+description: Annual cost, revenue, and burden classification.
+columns:
+  annual_cost_id: {type: string, required: true}
+  entity_id: {type: string, required: true}
+  fy: {type: string, required: true}
+  gross_entity_spend: {type: number, required: false}
+  total_revenue: {type: number, required: false}
+  direct_taxpayer_cost: {type: number, required: false}
+  citizen_funded_revenue: {type: number, required: false}
+  regulated_charge_burden: {type: number, required: false}
+  mandatory_fee_burden: {type: number, required: false}
+  public_debt_support: {type: number, required: false}
+  commercial_revenue: {type: number, required: false}
+  profit_remitted: {type: number, required: false}
+  net_public_burden: {type: number, required: false}
+  funding_channel:
+    type: enum
+    required: true
+    values: [taxpayer_appropriation, public_debt, ratepayer_charge, user_fee, mandatory_premium, regulatory_levy, licence_fee, toll_or_fare, tuition_or_student_fee, monopoly_consumer_charge, commercial_market_revenue, employer_assessment, worker_assessment, property_tax, municipal_utility_fee, public_transfer, government_guarantee, public_equity_injection, public_loan, tax_expenditure, mixed, unknown]
+  burden_holder:
+    type: enum
+    required: true
+    values: [taxpayer, ratepayer, fee_payer, consumer, student, passenger, shipper, driver, employer, employee, property_owner, business_customer, regulated_industry, future_taxpayer, public_balance_sheet, unknown]
+  unit: {type: string, required: true}
+  basis: {type: string, required: true}
+  source_id: {type: string, required: true}
+  confidence: {type: string, required: true}
+  extracted_at: {type: string, required: true}
