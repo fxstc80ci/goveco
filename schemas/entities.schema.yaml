@@ -1,0 +1,34 @@
+table: entities
+primary_key: entity_id
+description: Master entity registry for public ecosystem entities.
+columns:
+  entity_id: {type: string, required: true}
+  name: {type: string, required: true}
+  legal_name: {type: string, required: false}
+  jurisdiction: {type: string, required: true}
+  government_level:
+    type: enum
+    required: true
+    values: [federal, provincial, territorial, municipal, indigenous, mixed, arm_length, private_publicly_funded, unknown]
+  parent_id: {type: string, required: false}
+  ultimate_parent_id: {type: string, required: false}
+  entity_type:
+    type: enum
+    required: true
+    values: [department, agency, crown_corporation, crown_subsidiary, government_business_enterprise, health_authority, school_board, post_secondary, municipality, municipal_corporation, utility, pension_manager, workers_compensation_board, delegated_authority, regulatory_body, foundation, nonprofit_delivery_body, contractor, p3_spv, indigenous_government, indigenous_development_corp, unknown]
+  legal_form: {type: string, required: false}
+  is_owned: {type: boolean, required: false}
+  is_controlled: {type: boolean, required: false}
+  is_funded: {type: boolean, required: false}
+  is_statutory: {type: boolean, required: false}
+  is_consolidated: {type: boolean, required: false}
+  is_gbe: {type: boolean, required: false}
+  is_delegated_authority: {type: boolean, required: false}
+  is_public_monopoly: {type: boolean, required: false}
+  funding_model: {type: string, required: false}
+  governance_model: {type: string, required: false}
+  auditor: {type: string, required: false}
+  foi_status: {type: string, required: false}
+  procurement_rules: {type: string, required: false}
+  source_id: {type: string, required: true}
+  confidence: {type: string, required: true}
