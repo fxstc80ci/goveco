@@ -1,0 +1,35 @@
+table: accountability
+primary_key: accountability_id
+description: Governance, public visibility, and citizen control attributes.
+columns:
+  accountability_id: {type: string, required: true}
+  entity_id: {type: string, required: true}
+  fy: {type: string, required: false}
+  answers_to:
+    type: enum
+    required: true
+    values: [parliament, legislature, municipal_council, minister, cabinet, appointed_board, regulator, shareholder_minister, members, ratepayers, users, contracting_department, no_clear_public_accountability, unknown]
+  citizen_control_level:
+    type: enum
+    required: true
+    values: [direct_electoral_control, indirect_ministerial_control, board_governed_public_appointment, independent_regulator, delegated_authority, contracted_delivery, private_publicly_funded, public_monopoly_no_direct_control, unknown]
+  board_selection_method: {type: string, required: false}
+  ministerial_control: {type: string, required: false}
+  public_vote_control: {type: string, required: false}
+  ratepayer_control: {type: string, required: false}
+  public_consultation_required: {type: string, required: false}
+  foi_coverage: {type: string, required: false}
+  auditor_general_access: {type: string, required: false}
+  public_accounts_consolidation: {type: string, required: false}
+  procurement_transparency: {type: string, required: false}
+  compensation_disclosure: {type: string, required: false}
+  appeal_mechanism: {type: string, required: false}
+  complaint_mechanism: {type: string, required: false}
+  performance_reporting: {type: string, required: false}
+  public_risk_without_public_control:
+    type: enum
+    required: true
+    values: [low, medium, high, systemic, unknown]
+  accountability_notes: {type: string, required: false}
+  source_id: {type: string, required: true}
+  confidence: {type: string, required: true}
