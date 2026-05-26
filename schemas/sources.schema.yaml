@@ -1,0 +1,16 @@
+table: sources
+primary_key: source_id
+description: Source registry for all goveco evidence.
+columns:
+  source_id: {type: string, required: true}
+  title: {type: string, required: true}
+  publisher: {type: string, required: true}
+  url: {type: string, required: false}
+  document_type: {type: string, required: true}
+  jurisdiction: {type: string, required: false}
+  publication_date: {type: string, required: false}
+  retrieved_at: {type: string, required: true}
+  fiscal_year: {type: string, required: false}
+  page_or_table: {type: string, required: false}
+  extraction_method: {type: string, required: false}
+  notes: {type: string, required: false}
