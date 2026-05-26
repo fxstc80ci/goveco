@@ -1,0 +1,17 @@
+table: entity_relationships
+primary_key: relationship_id
+description: Parent, subsidiary, funding, contract, and control relationships.
+columns:
+  relationship_id: {type: string, required: true}
+  source_entity_id: {type: string, required: true}
+  target_entity_id: {type: string, required: true}
+  relationship_type:
+    type: enum
+    required: true
+    values: [parent, subsidiary, controlled_by, funded_by, regulates, contracted_by, contractor_to, guarantee_provider, guarantee_recipient, grantor, recipient, owns, unknown]
+  start_date: {type: string, required: false}
+  end_date: {type: string, required: false}
+  percent_ownership: {type: number, required: false}
+  consolidation_scope: {type: string, required: false}
+  source_id: {type: string, required: true}
+  confidence: {type: string, required: true}
