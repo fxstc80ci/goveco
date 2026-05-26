@@ -1,0 +1,20 @@
+table: employment
+primary_key: employment_id
+description: Headcount, FTE, contractor-equivalent, and compensation basis tracking.
+columns:
+  employment_id: {type: string, required: true}
+  entity_id: {type: string, required: true}
+  fy: {type: string, required: true}
+  headcount_value: {type: number, required: false}
+  headcount_basis:
+    type: enum
+    required: true
+    values: [headcount, fte, members, contractor_estimate, unknown]
+  compensation_expense: {type: number, required: false}
+  benefits_expense: {type: number, required: false}
+  pension_expense: {type: number, required: false}
+  contractor_jobs_est: {type: number, required: false}
+  estimation_method: {type: string, required: false}
+  unit: {type: string, required: true}
+  source_id: {type: string, required: true}
+  confidence: {type: string, required: true}
