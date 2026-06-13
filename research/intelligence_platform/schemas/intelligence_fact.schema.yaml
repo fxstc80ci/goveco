@@ -1,0 +1,149 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://goveco.local/schemas/intelligence_fact.schema.yaml
+title: IntelligenceFact
+description: Generic structured intelligence fact derived from public records, commercial feeds, APIs, analyst research, or subscriber submissions.
+type: object
+additionalProperties: false
+required:
+  - fact_id
+  - fact_type
+  - domain_segments
+  - claim_text
+  - source_refs
+  - confidence
+  - verification_state
+  - distribution_state
+properties:
+  fact_id:
+    type: string
+    pattern: '^FACT-[A-Z0-9._-]+$'
+  fact_type:
+    type: string
+    enum:
+      - entity_fact
+      - event_fact
+      - relationship_fact
+      - metric_fact
+      - legal_fact
+      - financial_fact
+      - operational_fact
+      - observation_fact
+      - geospatial_fact
+      - hypothesis_fact
+  domain_segments:
+    type: array
+    minItems: 1
+    items:
+      type: string
+      pattern: '^SEG-[A-Z0-9._-]+$'
+  claim_text:
+    type: string
+    minLength: 1
+  normalized_statement:
+    type: string
+  subject_entity_id:
+    type: string
+  object_entity_id:
+    type: string
+  event_id:
+    type: string
+  relationship_type:
+    type: string
+  metric:
+    type: object
+    additionalProperties: true
+    properties:
+      metric_name:
+        type: string
+      value:
+        type: [number, string]
+      unit:
+        type: string
+      period_start:
+        type: string
+        format: date
+      period_end:
+        type: string
+        format: date
+  geography:
+    type: object
+    additionalProperties: false
+    properties:
+      country:
+        type: string
+      province_state:
+        type: string
+      municipality:
+        type: string
+      latitude:
+        type: number
+      longitude:
+        type: number
+      geometry_ref:
+        type: string
+  valid_from:
+    type: string
+    format: date
+  valid_to:
+    type: string
+    format: date
+  observed_at:
+    type: string
+    format: date-time
+  source_refs:
+    type: array
+    minItems: 1
+    items:
+      type: string
+  contributor_ref:
+    type: string
+  confidence:
+    type: number
+    minimum: 0
+    maximum: 5
+  verification_state:
+    type: string
+    enum:
+      - raw
+      - quarantined
+      - duplicate_candidate
+      - unverified_lead
+      - corroborated_lead
+      - verified
+      - disputed
+      - superseded
+      - rejected
+      - restricted
+  contradiction_refs:
+    type: array
+    items:
+      type: string
+  counterargument:
+    type: string
+  proof_target:
+    type: string
+  sensitivity:
+    type: string
+    enum:
+      - public
+      - subscriber_only
+      - commercial_restricted
+      - privacy_review
+      - legal_review
+      - security_review
+      - internal_only
+  distribution_state:
+    type: string
+    enum:
+      - not_distributable
+      - quarantined
+      - analyst_review
+      - reviewed
+      - subscriber_distribution
+      - public_release
+      - embargoed
+      - restricted
+  tags:
+    type: array
+    items:
+      type: string
