@@ -1,0 +1,6 @@
+timeline_id,event_date,event_title,lane,actor,impact_summary,linked_evidence_ids,source_title,source_url,confidence,notes
+T000,YYYY-MM-DD,Event title,lane_name,Actor name,Short impact summary,E000,Source title,https://example.invalid,1-5,Free-form notes
+T001,YYYY-MM-DD,Carney new-order rhetoric,rhetoric_ideology,Mark Carney,Track exact statement context and link to evidence row,E001,TBD,TBD,1,Seed placeholder
+T002,YYYY-MM-DD,Trump Canada tariff or 51st-state pressure,trade_pressure,Donald Trump,Track exact statement or legal action and link to evidence row,E002,TBD,TBD,1,Seed placeholder
+T003,YYYY-MM-DD,Canadian defence or Arctic acceleration,defence_integration,Government of Canada,Track official announcement project list amount and authority,TBD,TBD,TBD,1,Seed placeholder
+T004,YYYY-MM-DD,Major project or emergency-style authority advanced,legal_authority,Government of Canada,Track bill statute order or regulatory change,E003,TBD,TBD,1,Seed placeholder
