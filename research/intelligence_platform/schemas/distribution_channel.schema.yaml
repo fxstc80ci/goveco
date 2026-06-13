@@ -1,0 +1,105 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://goveco.local/schemas/distribution_channel.schema.yaml
+title: DistributionChannel
+description: Defines how normalized intelligence facts and products are distributed to subscribers, APIs, dashboards, exports, and reports.
+type: object
+additionalProperties: false
+required:
+  - channel_id
+  - channel_type
+  - audience
+  - entitlement_rule
+  - minimum_confidence
+  - allowed_distribution_states
+properties:
+  channel_id:
+    type: string
+    pattern: '^DIST-[A-Z0-9._-]+$'
+  channel_name:
+    type: string
+  channel_type:
+    type: string
+    enum:
+      - public_report
+      - subscriber_brief
+      - api_feed
+      - webhook
+      - dashboard
+      - csv_export
+      - json_export
+      - alert_stream
+      - evidence_bundle
+      - graph_query
+      - analyst_workspace
+  audience:
+    type: string
+    enum:
+      - public
+      - free_subscriber
+      - paid_subscriber
+      - enterprise_subscriber
+      - analyst
+      - internal
+      - partner
+      - restricted_client
+  domain_segments:
+    type: array
+    items:
+      type: string
+  geography_filter:
+    type: array
+    items:
+      type: string
+  entity_watchlist_refs:
+    type: array
+    items:
+      type: string
+  entitlement_rule:
+    type: string
+  minimum_confidence:
+    type: number
+    minimum: 0
+    maximum: 5
+  allowed_distribution_states:
+    type: array
+    items:
+      type: string
+      enum:
+        - reviewed
+        - subscriber_distribution
+        - public_release
+        - restricted
+  excluded_sensitivities:
+    type: array
+    items:
+      type: string
+  delivery_frequency:
+    type: string
+    enum:
+      - realtime
+      - hourly
+      - daily
+      - weekly
+      - monthly
+      - on_demand
+  output_format:
+    type: string
+    enum:
+      - markdown
+      - html
+      - csv
+      - json
+      - jsonl
+      - yaml
+      - pdf
+      - graphml
+      - rdf
+      - neo4j_csv
+  include_sources:
+    type: boolean
+  include_confidence:
+    type: boolean
+  include_counterarguments:
+    type: boolean
+  include_proof_targets:
+    type: boolean
