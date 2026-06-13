@@ -1,0 +1,167 @@
+# Sovereignty Integration Evidence Matrix Schema
+# Status: working draft
+# Author: Craig MacPherson / Arti Muse
+# Created: 2026-06-13
+
+schema:
+  name: sovereignty_integration_evidence_matrix
+  version: 0.1.0
+  purpose: >
+    Store source-grounded evidence rows for testing sovereignty dilution,
+    continental integration, public burden, emergency authority, and
+    public-private beneficiary alignment.
+
+controlled_vocabularies:
+  lane:
+    - rhetoric_ideology
+    - legal_authority
+    - money_flow
+    - beneficiary_mapping
+    - defence_integration
+    - trade_pressure
+    - media_narrative
+    - resource_control
+    - constitutional_impact
+    - timeline_synchronization
+  source_type:
+    - primary
+    - official
+    - media
+    - partisan
+    - opinion
+    - social
+    - unknown
+  source_rank:
+    5: primary legal financial contract registry or audited document
+    4: official transcript release or regulator record
+    3: factual reporting with attributable facts
+    2: partisan advocacy or opinion source
+    1: social unsourced or unverified lead
+  sovereignty_impact:
+    - none
+    - low
+    - medium
+    - high
+    - unknown
+  money_impact:
+    - unknown
+    - estimated
+    - confirmed
+    - not_applicable
+  brookfield_relevance:
+    - none
+    - indirect
+    - sector_overlap
+    - direct_contract
+    - direct_ownership
+    - unknown
+  us_relevance:
+    - none
+    - indirect
+    - direct
+    - unknown
+  support_classification:
+    - supports
+    - weakly_supports
+    - neutral
+    - contradicts
+    - unresolved
+  confidence:
+    min: 1
+    max: 5
+
+entities:
+  evidence_row:
+    primary_key: evidence_id
+    fields:
+      evidence_id:
+        type: string
+        required: true
+        example: E001
+      event_date:
+        type: date
+        required: false
+        format: YYYY-MM-DD
+      lane:
+        type: enum
+        enum_ref: lane
+        required: true
+      event_claim:
+        type: string
+        required: true
+      actor:
+        type: string
+        required: false
+      source_title:
+        type: string
+        required: false
+      source_url:
+        type: string
+        required: false
+      source_type:
+        type: enum
+        enum_ref: source_type
+        required: true
+      evidence_summary:
+        type: string
+        required: true
+      mechanism:
+        type: string
+        required: true
+      beneficiary:
+        type: string
+        required: false
+      sovereignty_impact:
+        type: enum
+        enum_ref: sovereignty_impact
+        required: true
+      money_impact:
+        type: enum
+        enum_ref: money_impact
+        required: true
+      brookfield_relevance:
+        type: enum
+        enum_ref: brookfield_relevance
+        required: true
+      us_relevance:
+        type: enum
+        enum_ref: us_relevance
+        required: true
+      supports_hypothesis:
+        type: enum
+        enum_ref: support_classification
+        required: true
+      confidence:
+        type: integer
+        minimum: 1
+        maximum: 5
+        required: true
+      counterargument:
+        type: string
+        required: true
+      proof_target:
+        type: string
+        required: true
+      notes:
+        type: string
+        required: false
+
+semantic_constraints:
+  - claim_text_must_describe_observable_event_not_final_conclusion
+  - confidence_above_3_requires_primary_official_or_strong_multi_source_support
+  - brookfield_relevance_direct_contract_requires_contract_or_procurement_source
+  - brookfield_relevance_direct_ownership_requires_ownership_or_filing_source
+  - sovereignty_impact_high_requires_legal_authority_command_control_or_binding_obligation_source
+  - counterargument_required_for_all_non_neutral_rows
+  - proof_target_required_for_all_rows_below_confidence_5
+
+future_tables:
+  - sources
+  - actors
+  - projects_money_flow
+  - ownership_links
+  - legal_authorities
+  - public_burden_items
+  - timeline_events
+  - contradictions
+  - research_tasks
