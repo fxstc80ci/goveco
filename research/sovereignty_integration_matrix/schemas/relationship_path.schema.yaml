@@ -1,0 +1,98 @@
+schema: relationship_path
+version: 0.1.0
+status: draft
+purpose: >
+  Defines an evidence-backed relationship path for hypothesis testing. A path is a chain
+  of relationship packets used to test whether events, actors, policies, authorities,
+  money flows, and beneficiaries are connected by a credible mechanism.
+
+required_fields:
+  - path_id
+  - hypothesis_id
+  - path_summary
+  - nodes
+  - edges
+  - cumulative_confidence
+  - weakest_link
+  - strongest_evidence
+  - unresolved_gaps
+
+fields:
+  path_id:
+    type: string
+    description: Durable relationship path identifier.
+    example: PATH-000001
+
+  hypothesis_id:
+    type: string
+    description: Hypothesis or analytical question tested by this path.
+
+  path_summary:
+    type: string
+    description: Plain-language summary of the relationship chain.
+
+  nodes:
+    type: list
+    description: Ordered entities, events, mechanisms, sectors, authorities, or beneficiaries in the path.
+
+  edges:
+    type: list
+    description: Ordered relationship_packet IDs connecting the nodes.
+
+  path_type:
+    type: enum
+    allowed_values:
+      - authority_path
+      - money_flow_path
+      - beneficiary_path
+      - dependency_path
+      - narrative_path
+      - trade_pressure_path
+      - defence_integration_path
+      - resource_control_path
+      - contradiction_path
+      - counterargument_path
+
+  cumulative_confidence:
+    type: number
+    minimum: 1
+    maximum: 5
+    description: Combined path confidence. Should be constrained by weakest-link logic.
+
+  weakest_link:
+    type: string
+    description: The packet, relationship, source gap, or proof gap that most limits confidence.
+
+  strongest_evidence:
+    type: string
+    description: Highest-quality evidence supporting the path.
+
+  unresolved_gaps:
+    type: list
+    description: Missing proof targets that prevent stronger conclusion.
+
+  contradiction_evidence:
+    type: list
+    description: Relationship packets, sources, or counterarguments that weaken the path.
+
+  materiality_score:
+    type: integer
+    minimum: 1
+    maximum: 5
+    description: How material the path is to public burden, sovereignty, money, or governance.
+
+  analyst_state:
+    type: enum
+    allowed_values: [proposed, sourced, reviewed, disputed, accepted, deprecated]
+
+  created_from_query:
+    type: string
+    nullable: true
+    description: Analyst query or automated process that generated the path.
+
+validation_rules:
+  - cumulative_confidence may not exceed the confidence score of the weakest critical edge by more than 1.
+  - direct-beneficiary paths require at least one directly_benefits packet with source_strength >= 4.
+  - contradiction_evidence must be evaluated before analyst_state can be accepted.
+  - unresolved_gaps must be empty or explicitly waived before publishing a high-confidence conclusion.
+  - narrative_path records must distinguish rhetoric from legal or financial mechanism.
