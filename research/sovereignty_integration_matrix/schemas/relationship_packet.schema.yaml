@@ -1,0 +1,209 @@
+schema: relationship_packet
+version: 0.1.0
+status: draft
+purpose: >
+  Defines a relationship-first intelligence packet for evidence-backed analysis.
+  Packets are designed for graph storage, vector embedding, SQL querying,
+  and LLM context assembly.
+
+required_fields:
+  - packet_id
+  - hypothesis_id
+  - subject_entity
+  - relationship_type
+  - object_entity
+  - evidence_sources
+  - confidence_score
+  - counterargument
+  - proof_target
+
+fields:
+  packet_id:
+    type: string
+    description: Durable relationship packet identifier.
+    example: RP-000001
+
+  hypothesis_id:
+    type: string
+    description: Hypothesis or analytical question this packet supports, weakens, or tests.
+    example: HYP-SOV-001
+
+  subject_entity:
+    type: string
+    description: Source-side entity, actor, policy, project, event, sector, or authority.
+
+  relationship_type:
+    type: enum
+    allowed_values:
+      - associated_with
+      - formerly_affiliated_with
+      - owns_or_controls
+      - has_sector_exposure
+      - allocates_funding_to
+      - creates_authority_for
+      - expands_authority_over
+      - removes_constraint_from
+      - increases_public_burden
+      - reduces_public_oversight
+      - creates_operational_dependency
+      - creates_security_dependency
+      - creates_trade_dependency
+      - potentially_benefits
+      - directly_benefits
+      - supports
+      - weakly_supports
+      - contradicts
+      - requires_proof_target
+    description: Canonical semantic relationship type.
+
+  object_entity:
+    type: string
+    description: Target-side entity, actor, policy, project, event, sector, authority, or impact.
+
+  event_context:
+    type: string
+    nullable: true
+    description: Related event identifier from the evidence matrix or timeline.
+
+  mechanism:
+    type: list
+    allowed_values:
+      - trade_pressure
+      - defence_spending
+      - infrastructure_buildout
+      - emergency_authority
+      - major_project_fast_track
+      - media_policy
+      - regulatory_change
+      - procurement
+      - public_finance
+      - debt_financing
+      - user_fee
+      - regulated_rate
+      - monopoly_pricing
+      - public_guarantee
+      - ownership_control
+      - resource_control
+      - arctic_sovereignty
+      - border_security
+      - continental_integration
+      - climate_finance
+      - industrial_policy
+
+  impact_domain:
+    type: list
+    allowed_values:
+      - sovereignty
+      - public_finance
+      - defence
+      - trade
+      - media
+      - infrastructure
+      - energy
+      - minerals
+      - agriculture
+      - lumber
+      - water
+      - transport
+      - housing
+      - carbon_markets
+      - regulatory_governance
+      - democratic_accountability
+
+  beneficiary_class:
+    type: list
+    description: Class of possible beneficiary. Specific firms require direct evidence.
+    allowed_values:
+      - public_sector
+      - federal_government
+      - provincial_government
+      - crown_corporation
+      - private_capital
+      - infrastructure_funds
+      - banks
+      - pension_funds
+      - defence_contractors
+      - engineering_firms
+      - construction_firms
+      - energy_firms
+      - logistics_firms
+      - media_organizations
+      - technology_platforms
+      - named_firm
+
+  public_burden_type:
+    type: list
+    allowed_values:
+      - taxpayer_cost
+      - debt_financing
+      - interest_cost
+      - public_guarantee
+      - contingent_liability
+      - user_fee
+      - regulated_rate
+      - monopoly_price
+      - carbon_cost
+      - inflationary_cost
+      - opportunity_cost
+      - procurement_exposure
+      - subsidy
+      - tax_expenditure
+
+  sovereignty_impact:
+    type: enum
+    allowed_values: [none, low, medium, high]
+
+  money_materiality:
+    type: enum
+    allowed_values: [unknown, low, medium, high, confirmed_amount]
+
+  brookfield_relevance:
+    type: enum
+    allowed_values: [none, indirect, sector_overlap, ownership_overlap, direct_contract, direct_ownership, unknown]
+
+  us_relevance:
+    type: enum
+    allowed_values: [none, indirect, direct, unknown]
+
+  evidence_sources:
+    type: list
+    description: Source identifiers from the source registry or evidence matrix.
+
+  source_strength:
+    type: integer
+    minimum: 1
+    maximum: 5
+    description: Source quality score.
+
+  confidence_score:
+    type: integer
+    minimum: 1
+    maximum: 5
+    description: Relationship confidence score. Must reflect the weakest proof link.
+
+  counterargument:
+    type: string
+    description: Best non-hypothesis or innocent explanation.
+
+  proof_target:
+    type: string
+    description: Specific evidence needed to raise confidence.
+
+  analyst_state:
+    type: enum
+    allowed_values: [proposed, sourced, reviewed, disputed, accepted, deprecated]
+
+  valid_from:
+    type: date
+    nullable: true
+
+  valid_to:
+    type: date
+    nullable: true
+
+validation_rules:
+  - Direct firm benefit claims require relationship_type = directly_benefits and source_strength >= 4.
+  - Sector overlap may not be described as direct benefit.
+  - confidence_score must be lowered when proof_target identifies a material missing link.
+  - counterargument must be populated before analyst_state can be accepted.
+  - deprecated packets must preserve source lineage and deprecation rationale.
