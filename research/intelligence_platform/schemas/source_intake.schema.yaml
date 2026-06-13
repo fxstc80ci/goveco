@@ -1,0 +1,125 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://goveco.local/schemas/source_intake.schema.yaml
+title: SourceIntakeRecord
+description: Intake record for public sources, commercial feeds, APIs, internal research, and subscriber-submitted intelligence.
+type: object
+additionalProperties: false
+required:
+  - source_id
+  - source_type
+  - intake_channel
+  - title
+  - custody_state
+  - licence_state
+  - processing_state
+properties:
+  source_id:
+    type: string
+    pattern: '^SRC-[A-Z0-9._-]+$'
+  source_type:
+    type: string
+    enum:
+      - government_record
+      - legislation
+      - regulation
+      - budget
+      - procurement_record
+      - court_record
+      - corporate_filing
+      - market_data
+      - commercial_feed
+      - public_api
+      - private_api
+      - media_report
+      - academic_report
+      - subscriber_submission
+      - field_observation
+      - image
+      - audio
+      - video
+      - document
+      - dataset
+      - other
+  intake_channel:
+    type: string
+    enum:
+      - manual_research
+      - web_scrape
+      - api_pull
+      - file_upload
+      - subscriber_portal
+      - email
+      - commercial_feed
+      - batch_import
+      - partner_exchange
+  title:
+    type: string
+  url:
+    type: string
+  publisher:
+    type: string
+  contributor_ref:
+    type: string
+  retrieved_at:
+    type: string
+    format: date-time
+  published_at:
+    type: string
+    format: date-time
+  document_date:
+    type: string
+    format: date
+  licence_state:
+    type: string
+    enum:
+      - public_domain
+      - open_licence
+      - fair_use_review
+      - commercial_licence
+      - subscriber_granted
+      - restricted
+      - unknown
+  custody_state:
+    type: string
+    enum:
+      - original_source
+      - copied
+      - transformed
+      - user_submitted
+      - third_party_feed
+      - derived_extract
+  processing_state:
+    type: string
+    enum:
+      - received
+      - quarantined
+      - parsed
+      - extracted
+      - normalized
+      - reviewed
+      - rejected
+      - archived
+  source_quality_score:
+    type: number
+    minimum: 0
+    maximum: 5
+  domain_segments:
+    type: array
+    items:
+      type: string
+  retention_policy:
+    type: string
+  distribution_allowed:
+    type: boolean
+  restrictions:
+    type: array
+    items:
+      type: string
+  checksum:
+    type: string
+  raw_storage_ref:
+    type: string
+  extracted_fact_refs:
+    type: array
+    items:
+      type: string
